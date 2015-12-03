@@ -1,6 +1,6 @@
 <fieldset>
   <input id="start" ready on value='Toronto'> 
-  <input id="end"> 
+  <input id="end" ready on value ="224 st george st, toronto"> 
   <input type="button" value="GO" onclick="calcRoute()">
 </fieldset>
 
@@ -28,6 +28,9 @@ var showPosition = function (position) {
         map: map
     });
 }
+
+var labels = '12345678910';
+var labelIndex = 0;
 function initialize() {
   directionsDisplay = new google.maps.DirectionsRenderer();
   var citymap = new google.maps.LatLng(43.654262, -79.385975);
@@ -42,7 +45,6 @@ function initialize() {
 
 
 
-
 function dropPin() {
   // if any previous marker exists, let's first remove it from the map
   if (PinMarker) {
@@ -52,6 +54,7 @@ function dropPin() {
   PinMarker = new google.maps.Marker({
     position: map.getCenter(),
     map: map,
+    label: labels[labelIndex++],
     draggable: true,
   });
   // Add circle overlay and bind to marker
@@ -76,8 +79,23 @@ function dropPin() {
 
 function copyMarkerpositionToInput() {
   // get the position of the marker, and set it as the value of input
-  document.getElementById("end").value = endMarker.getPosition().lat() +','+  endMarker.getPosition().lng();
+  document.getElementById("end").value = PinMarker.getPosition().lat() +','+  PinMarker.getPosition().lng();
 }
+
+function calcWaypoints(){
+  var waypts = [];
+  var checkboxArray = document.getElementById('waypoints');
+  for (var i = 0; i < checkboxArray.length; i++) {
+    if (checkboxArray.options[i].selected) {
+        waypts.push({
+        location: checkboxArray[i].value,
+        stopover: true
+      });
+    }
+  }
+
+}
+
 
 function calcRoute() {
   var start = document.getElementById("start").value;
@@ -85,13 +103,41 @@ function calcRoute() {
   var request = {
     origin:start,
     destination:end,
+    //waypoints: waypts,
+    //optimizeWaypoints: true,
     travelMode: google.maps.TravelMode.BICYCLING
   };
   directionsService.route(request, function(result, status) {
     if (status == google.maps.DirectionsStatus.OK) {
       directionsDisplay.setDirections(result);
+      console.log(directionsService.route);
     }
   });
 }
 google.maps.event.addDomListener(window, 'load', initialize);
 </script>
+<div id ="list-waypoint">
+  <form>
+    <h2>Marker Notes</h2>
+    <oi> 
+        <p> 1. Pin added 11/30/15 at 2:05PM <br>
+        <span> Hazard: Debris on road from construction<span></p>
+    </oi>
+    <oi> 
+        <p> 2. Pin added 12/1/15 at 12:05PM <br>
+        Avoided Avenue Rd. North <br>
+        <span> Hazard: constuction <span>
+        </p>
+    </oi>
+    <!-- <input type="text" id="comment">
+     <output > -->
+  </form>
+  <oi> </oi>
+
+</div>
+
+<style type="text/css">
+span {font-weight: 600;font-size: larger;color: red;}
+
+
+</style>
