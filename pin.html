@@ -119,14 +119,17 @@ function calcRoute() {
 google.maps.event.addDomListener(window, 'load', initialize);
 </script>
 <!-- script for rendering comments -->
+
+
 <script type="text/javascript">
   function showInput() {
+
     var today = new Date();
-    today.toISOString().substring(0, 10).slice(0,10).replace(/-/g,"");
+    today.toISOString().substring(0, 10);
     var input =  document.getElementById("user_input").value;
 
     document.getElementById('display').innerHTML = "Hazard: " + input;
-     document.getElementById('display-date').innerHTML = today;
+     document.getElementById('display-date').innerHTML = "Pin added " + today;
     //document.getElementById('display').write(input);
 }
 
