@@ -1,6 +1,5 @@
 # GoogleMapsExtension
 
-Prototype for Human Computer Interaction Course
+Prototype for Human Computer Interaction Demo
 
-If I have time TODO:
-polish demo and clean up code
+
