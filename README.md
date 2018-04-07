@@ -1,6 +1,6 @@
 # Google Maps Extension
 
-Prototype for demo
+Prototype for demo - 
 Placing pins on specified location
 
 
