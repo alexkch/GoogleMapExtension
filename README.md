@@ -1,5 +1,5 @@
-# GoogleMapsExtension
+# Google Maps Extension
 
-Prototype for Human Computer Interaction Demo
+Prototype for Search nearest k persons demo
 
 
