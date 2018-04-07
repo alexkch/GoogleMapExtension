@@ -1,5 +1,6 @@
 # Google Maps Extension
 
-Prototype for Search nearest k persons demo
+Prototype for demo
+Placing pins on specified location
 
 
